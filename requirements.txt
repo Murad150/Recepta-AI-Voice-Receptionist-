@@ -1,0 +1,44 @@
+# ─── Recepta - Python Dependencies ─────────────────────────────────────
+# Install: pip install -r requirements.txt
+
+# ─── Orchestration ─────────────────────────────────────────────────────────
+pipecat-ai>=0.1.0                    # Real-time audio pipeline framework
+aiohttp>=3.9.0                       # Async HTTP client/server
+websockets>=12.0                     # WebSocket client for streaming STT
+python-dotenv>=1.0.0                 # Environment variable loading
+
+# ─── Speech-to-Text (Speaches - faster-whisper) ───────────────────────────
+# Speaches runs as a Docker container, separate from Python dependencies.
+# See docker/docker-compose.yml for Speaches setup.
+
+# ─── LLM (Ollama) ──────────────────────────────────────────────────────────
+# Ollama runs as a separate service. The Python client communicates via HTTP.
+# Install Ollama from: https://ollama.com/download
+
+# ─── Text-to-Speech (Kokoro) ───────────────────────────────────────────────
+kokoro>=0.7                          # 82M parameter TTS model
+soundfile>=0.12.0                    # Audio file read/write
+numpy>=1.24.0                        # Audio data manipulation
+
+# ─── Transport (LiveKit) ───────────────────────────────────────────────────
+livekit-api>=1.0.0                    # LiveKit API (token generation)
+livekit>=1.0.0                       # LiveKit RTC (WebRTC client)
+protobuf>=4.21.0                     # Required by LiveKit
+
+# ─── Calendar (Google Calendar API) ────────────────────────────────────────
+google-api-python-client>=2.100.0    # Google API client
+google-auth>=2.27.0                  # OAuth2 authentication
+google-auth-httplib2>=0.1.0          # HTTP transport
+google-auth-oauthlib>=1.0.0          # OAuth flow
+
+# ─── Vector Database (ChromaDB RAG) ───────────────────────────────────────
+chromadb>=0.5.0                      # Vector database
+PyPDF2>=3.0.0                        # PDF parsing for knowledge base
+
+# ─── CLI & Utilities ──────────────────────────────────────────────────────
+colorama>=0.4.6                      # Colored terminal output
+rich>=13.0.0                         # Rich terminal formatting (optional)
+
+# ─── Development & Testing ────────────────────────────────────────────────
+pytest>=7.4.0                        # Test framework
+pytest-asyncio>=0.21.0               # Async test support

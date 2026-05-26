@@ -1,0 +1,24 @@
+{
+  "scenarios": [
+    {
+      "name": "Personal Injury Intake",
+      "caller_inputs": [
+        "I was in a car accident last week",
+        "I'm not sure if I need a lawyer",
+        "My name is Michael Brown",
+        "My phone is 555-234-5678"
+      ],
+      "expected_outcome": "Consultation booked for personal injury case"
+    },
+    {
+      "name": "Urgent - Court Deadline",
+      "caller_inputs": [
+        "I have a court date next week and I need a lawyer",
+        "I was served with papers yesterday",
+        "It's a custody hearing",
+        "My name is Emily Davis"
+      ],
+      "expected_outcome": "Urgent priority handling, case type identified as family law"
+    }
+  ]
+}

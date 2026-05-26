@@ -1,0 +1,1 @@
+# Recepta - Config package

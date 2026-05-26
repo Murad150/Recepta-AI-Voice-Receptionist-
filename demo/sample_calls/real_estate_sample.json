@@ -1,0 +1,45 @@
+{
+  "scenarios": [
+    {
+      "name": "Buyer Looking for Home",
+      "caller_inputs": [
+        "Hi, I'm looking to buy a 3-bedroom house",
+        "My budget is around $400,000",
+        "I'd like to see some properties this weekend",
+        "My name is Jessica Adams",
+        "My phone is 555-345-6789"
+      ],
+      "expected_outcome": "Showing scheduled, buyer preferences collected"
+    },
+    {
+      "name": "Seller Interested in Listing",
+      "caller_inputs": [
+        "I'm thinking about selling my home",
+        "I'd like to know what my property is worth",
+        "It's a 4-bedroom in the suburbs",
+        "My name is Robert Chen"
+      ],
+      "expected_outcome": "Consultation booked, seller info collected"
+    },
+    {
+      "name": "First-Time Buyer",
+      "caller_inputs": [
+        "I'm a first-time buyer and I don't know where to start",
+        "I'm looking for something affordable",
+        "Can you help me understand the process?",
+        "My name is Emily Parker"
+      ],
+      "expected_outcome": "Agent provides guidance, buyer consultation scheduled"
+    },
+    {
+      "name": "Listing Inquiry",
+      "caller_inputs": [
+        "I saw a listing online, can I see it?",
+        "The one on Maple Street",
+        "Tomorrow afternoon works",
+        "My name is David Wilson"
+      ],
+      "expected_outcome": "Showing scheduled for the specific property"
+    }
+  ]
+}

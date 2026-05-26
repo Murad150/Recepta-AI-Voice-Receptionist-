@@ -1,0 +1,45 @@
+# ─── Recepta - .gitignore ──────────────────────────────────────────────
+
+# Environment
+.env
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Runtime Data
+data/
+!data/.gitkeep
+
+# Logs
+*.log
+
+# Credentials
+config/google_credentials.json
+config/google_token.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# Reserved Windows device names
+nul  

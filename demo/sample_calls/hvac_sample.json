@@ -1,0 +1,23 @@
+{
+  "scenarios": [
+    {
+      "name": "No Heat Emergency",
+      "caller_inputs": [
+        "My furnace stopped working and it's freezing",
+        "I have no heat at all",
+        "The temperature is dropping",
+        "My address is 123 Main Street"
+      ],
+      "expected_outcome": "Emergency dispatch, priority service scheduled"
+    },
+    {
+      "name": "Routine Maintenance",
+      "caller_inputs": [
+        "I'd like to schedule my annual AC maintenance",
+        "Next Wednesday morning works",
+        "My name is Tom Wilson"
+      ],
+      "expected_outcome": "Maintenance appointment scheduled"
+    }
+  ]
+}

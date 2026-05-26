@@ -1,0 +1,44 @@
+{
+  "scenarios": [
+    {
+      "name": "Routine Checkup Booking",
+      "caller_inputs": [
+        "Hi, I'd like to schedule a checkup",
+        "Tuesday at 10 AM works",
+        "My name is John Smith",
+        "My phone is 555-123-4567",
+        "I'm a new patient",
+        "I have Delta Dental insurance"
+      ],
+      "expected_outcome": "Appointment booked for Tuesday at 10 AM"
+    },
+    {
+      "name": "Emergency - Tooth Pain",
+      "caller_inputs": [
+        "I have severe tooth pain, it hurts a lot",
+        "Yes, I need to come in today",
+        "My name is Sarah Johnson",
+        "My number is 555-987-6543"
+      ],
+      "expected_outcome": "Emergency appointment scheduled, caller triaged"
+    },
+    {
+      "name": "FAQ - Hours & Insurance",
+      "caller_inputs": [
+        "What are your business hours?",
+        "Do you accept Cigna insurance?",
+        "Where are you located?"
+      ],
+      "expected_outcome": "Questions answered from knowledge base"
+    },
+    {
+      "name": "Cancel Appointment",
+      "caller_inputs": [
+        "I need to cancel my appointment for Thursday",
+        "Yes, please reschedule to next week",
+        "Tuesday afternoon would be good"
+      ],
+      "expected_outcome": "Appointment rescheduled or cancelled"
+    }
+  ]
+}

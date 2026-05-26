@@ -1,0 +1,68 @@
+# ─── Recepta - Docker Services ──────────────────────────────────────────────
+# Run: docker compose -f docker/docker-compose.yml up -d
+#
+# Services:
+#   speaches  - Local STT/TTS server (faster-whisper + kokoro)
+#   n8n       - Open-source workflow automation (optional)
+
+version: "3.8"
+
+services:
+  # ─── Speaches: STT (faster-whisper) + TTS (kokoro) ────────────────────
+  speaches:
+    image: ghcr.io/speaches-ai/speaches:latest
+    container_name: recepta-speaches
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - speaches-models:/models      # Cache downloaded models
+      - ../data/voices:/voices       # Custom voice samples
+    environment:
+      # Use 'cuda' for NVIDIA GPU, 'cpu' for CPU-only
+      - DEVICE=cpu
+      # Pre-load models for faster first request
+      - SPEACHES_PRELOAD_MODELS=true
+      # Logging
+      - RUST_LOG=info
+    # Uncomment for GPU support:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/models"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ─── n8n: Workflow Automation (Optional) ───────────────────────────────
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: recepta-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n-data:/home/node/.n8n
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=recepta
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD:-change-me-please}
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+    # Uncomment to use n8n:
+    # profiles:
+    #   - automation
+
+volumes:
+  speaches-models:
+    name: recepta-speaches-models
+  n8n-data:
+    name: recepta-n8n-data
