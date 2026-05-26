@@ -12,7 +12,18 @@ echo    Recepta - AI Receptionist Setup
 echo ========================================
 echo.
 
-REM ─── Step 0: Check Python ────────────────────────────────────────
+REM ─── Step 0: Check Git ───────────────────────────────────────────
+echo [0/7] Checking Git...
+where git >nul 2>&1
+if %errorlevel% neq 0 (
+    echo     Git not found! Download from: https://git-scm.com/download/win
+    pause
+    exit /b 1
+)
+echo     [OK] Git is installed
+echo.
+
+REM ─── Step 1: Check Python ────────────────────────────────────────
 echo [1/7] Checking Python...
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
@@ -25,7 +36,7 @@ python --version
 echo     [OK] Python is installed
 echo.
 
-REM ─── Step 1: Clone Repository ────────────────────────────────────
+REM ─── Step 2: Clone Repository ────────────────────────────────────
 echo [2/7] Cloning Recepta from GitHub...
 if exist "Recepta" (
     echo     Recepta folder already exists. Updating...
@@ -38,29 +49,31 @@ if exist "Recepta" (
 echo     [OK] Repository ready
 echo.
 
-REM ─── Step 2: Create Virtual Environment ──────────────────────────
+REM ─── Step 3: Create Virtual Environment ──────────────────────────
 echo [3/7] Creating virtual environment...
 if exist "venv" (
     echo     Virtual environment already exists
 ) else (
     python -m venv venv
 )
+set PIP=venv\Scripts\pip.exe
 echo     [OK] Virtual environment ready
 echo.
 
-REM ─── Step 3: Install Python Packages ─────────────────────────────
+REM ─── Step 4: Install Python Packages ─────────────────────────────
 echo [4/7] Installing Python packages...
-call venv\Scripts\activate.bat
-pip install --upgrade pip >nul 2>&1
-pip install -r requirements.txt
+%PIP% install --upgrade pip >nul 2>&1
+%PIP% install -r requirements.txt
 if %errorlevel% neq 0 (
     echo     Trying simplified requirements...
-    pip install -r requirements-simple.txt
+    %PIP% install -r requirements-simple.txt
 )
+REM Install PyTorch (CPU) for Kokoro TTS
+%PIP% install torch --index-url https://download.pytorch.org/whl/cpu
 echo     [OK] Python packages installed
 echo.
 
-REM ─── Step 4: Install Ollama ──────────────────────────────────────
+REM ─── Step 5: Install Ollama ──────────────────────────────────────
 echo [5/7] Checking Ollama...
 where ollama >nul 2>&1
 if %errorlevel% neq 0 (
@@ -83,7 +96,7 @@ if %errorlevel% neq 0 (
 )
 echo.
 
-REM ─── Step 5: Install Docker ──────────────────────────────────────
+REM ─── Step 6: Install Docker ──────────────────────────────────────
 echo [6/7] Checking Docker...
 where docker >nul 2>&1
 if %errorlevel% neq 0 (
@@ -104,7 +117,7 @@ if %errorlevel% neq 0 (
 )
 echo.
 
-REM ─── Step 6: Create .env File ────────────────────────────────────
+REM ─── Step 7: Create .env File ────────────────────────────────────
 echo [7/7] Setting up configuration...
 if not exist ".env" (
     (
